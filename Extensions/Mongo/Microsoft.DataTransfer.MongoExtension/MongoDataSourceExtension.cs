@@ -34,7 +34,9 @@ internal class MongoDataSourceExtension : IDataSourceExtension
         }
     }
 
-    public async IAsyncEnumerable<IDataItem> EnumerateCollectionAsync(Context context, string collectionName)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+    public static async IAsyncEnumerable<IDataItem> EnumerateCollectionAsync(Context context, string collectionName)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
     {
         var collection = context.GetRepository<BsonDocument>(collectionName);
         foreach (var record in collection.AsQueryable())

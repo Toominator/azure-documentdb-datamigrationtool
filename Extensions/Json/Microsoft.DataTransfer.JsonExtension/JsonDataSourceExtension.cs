@@ -63,7 +63,7 @@ namespace Microsoft.DataTransfer.JsonExtension
                 using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(file));
                 return await JsonSerializer.DeserializeAsync<List<Dictionary<string, object?>>>(stream, cancellationToken: cancellationToken);
             }
-            catch (Exception ex)
+            catch
             {
                 // list failed
             }
@@ -78,7 +78,7 @@ namespace Microsoft.DataTransfer.JsonExtension
                     list.Add(item);
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 // single item failed
             }
