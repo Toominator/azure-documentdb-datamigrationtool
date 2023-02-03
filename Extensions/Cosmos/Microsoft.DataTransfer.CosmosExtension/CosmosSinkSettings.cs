@@ -15,5 +15,7 @@ namespace Microsoft.DataTransfer.CosmosExtension
         public string? PartitionKeyPath { get; set; }
         public bool RecreateContainer { get; set; }
         public int BatchSize { get; set; } = 100;
+
+        public bool FieldsInCamelCase { get; set; }
     }
 }

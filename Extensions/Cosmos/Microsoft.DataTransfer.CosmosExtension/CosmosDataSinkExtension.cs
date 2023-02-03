@@ -100,7 +100,7 @@ namespace Microsoft.DataTransfer.CosmosExtension
             return task;
         }
 
-        private static ExpandoObject? BuildObject(IDataItem? source, bool requireStringId = false)
+        private static ExpandoObject? BuildObject(IDataItem? source, bool requireStringId = false, bool fieldInCamelCase = false)
         {
             if (source == null)
                 return null;
@@ -136,7 +136,7 @@ namespace Microsoft.DataTransfer.CosmosExtension
                     }).ToArray();
                 }
 
-                item.TryAdd(fieldName, value);
+                item.TryAdd(fieldInCamelCase ? field.ToCamelCase() : field, value);
             }
 
             return item;
