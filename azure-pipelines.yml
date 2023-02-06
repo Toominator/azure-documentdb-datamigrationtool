@@ -23,7 +23,6 @@ jobs:
       packageType: 'sdk'
       version: '6.0.x'
       performMultiLevelLookup: true
-    enabled: false
 
   - task: DotNetCoreCLI@2
     displayName: 'dotnet restore'
@@ -37,6 +36,5 @@ jobs:
     displayName: 'dotnet build'
     inputs:
       arguments: '--configuration $(BuildConfiguration) --no-restore'
-    enabled: false
 
 
