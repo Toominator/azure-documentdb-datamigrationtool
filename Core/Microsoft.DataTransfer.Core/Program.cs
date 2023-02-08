@@ -3,6 +3,7 @@ using Microsoft.DataTransfer.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Microsoft.DataTransfer.Core;
 
@@ -11,6 +12,11 @@ class Program
     public static async Task Main(string[] args)
     {
         using IHost host = Host.CreateDefaultBuilder(args)
+            .ConfigureLogging(x =>
+            {
+                x.ClearProviders();
+                x.AddConsole();
+            })
             .ConfigureAppConfiguration(cfg =>
             {
                 cfg.AddUserSecrets<Program>();
