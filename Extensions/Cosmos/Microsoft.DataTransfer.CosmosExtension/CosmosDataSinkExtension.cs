@@ -51,7 +51,7 @@ namespace Microsoft.DataTransfer.CosmosExtension
                 }
             }
 
-            var convertedObjects = dataItems.Select(di => BuildObject(di, true)).Where(o => o != null).OfType<ExpandoObject>();
+            var convertedObjects = dataItems.Select(di => BuildObject(di, true, settings.FieldsInCamelCase)).Where(o => o != null).OfType<ExpandoObject>();
             var batches = convertedObjects.Buffer(settings.BatchSize);
             var retry = GetRetryPolicy();
             await foreach (var batch in batches.WithCancellation(cancellationToken))
