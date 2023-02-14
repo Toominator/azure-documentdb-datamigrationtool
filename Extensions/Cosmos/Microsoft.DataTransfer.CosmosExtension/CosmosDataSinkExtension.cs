@@ -135,6 +135,12 @@ namespace Microsoft.DataTransfer.CosmosExtension
                         return dataItem;
                     }).ToArray();
                 }
+                else if (string.Equals(field, "createdAt", StringComparison.CurrentCultureIgnoreCase) ||
+                         string.Equals(field, "updatedAt", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    var dateTime = DateTime.Parse(value as string);
+                    value = DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
+                }
 
                 item.TryAdd(fieldInCamelCase ? field.ToCamelCase() : field, value);
             }
