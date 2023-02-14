@@ -136,7 +136,8 @@ namespace Microsoft.DataTransfer.CosmosExtension
                     }).ToArray();
                 }
                 else if (string.Equals(field, "createdAt", StringComparison.CurrentCultureIgnoreCase) ||
-                         string.Equals(field, "updatedAt", StringComparison.CurrentCultureIgnoreCase))
+                         string.Equals(field, "updatedAt", StringComparison.CurrentCultureIgnoreCase) ||
+                         string.Equals(field, "timestamp", StringComparison.CurrentCultureIgnoreCase))
                 {
                     var dateTime = DateTime.Parse(value as string);
                     value = DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
