@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Dynamic;
+using System.Globalization;
 using Microsoft.Azure.Cosmos;
 using Microsoft.DataTransfer.Interfaces;
 using Microsoft.Extensions.Configuration;
@@ -135,12 +136,16 @@ namespace Microsoft.DataTransfer.CosmosExtension
                         return dataItem;
                     }).ToArray();
                 }
-                else if (string.Equals(field, "createdAt", StringComparison.CurrentCultureIgnoreCase) ||
-                         string.Equals(field, "updatedAt", StringComparison.CurrentCultureIgnoreCase) ||
-                         string.Equals(field, "timestamp", StringComparison.CurrentCultureIgnoreCase))
+                else if (string.Equals(field, "timestamp", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    var dateTime = DateTime.Parse(value as string);
-                    value = DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
+                    return item;
+                }
+                else if (string.Equals(field, "createdAt", StringComparison.CurrentCultureIgnoreCase) ||
+                         string.Equals(field, "updatedAt", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    value = DateTime.Parse(value as string,
+                        CultureInfo.CreateSpecificCulture("en-GB"),
+                        DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
                 }
 
                 item.TryAdd(fieldInCamelCase ? field.ToCamelCase() : field, value);
