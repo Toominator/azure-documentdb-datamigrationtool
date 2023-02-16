@@ -138,7 +138,7 @@ namespace Microsoft.DataTransfer.CosmosExtension
                 }
                 else if (string.Equals(field, "timestamp", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    return item;
+                    continue;
                 }
                 else if (string.Equals(field, "createdAt", StringComparison.CurrentCultureIgnoreCase) ||
                          string.Equals(field, "updatedAt", StringComparison.CurrentCultureIgnoreCase))
