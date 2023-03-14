@@ -143,9 +143,10 @@ namespace Microsoft.DataTransfer.CosmosExtension
                 else if (string.Equals(field, "createdAt", StringComparison.CurrentCultureIgnoreCase) ||
                          string.Equals(field, "updatedAt", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    value = DateTime.Parse(value as string,
-                        CultureInfo.CreateSpecificCulture("en-GB"),
-                        DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+                    //value = DateTime.Parse(value as string,
+                    //    CultureInfo.CreateSpecificCulture("en-GB"),
+                    //    DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+                    value = DateTime.UtcNow;
                 }
 
                 item.TryAdd(fieldInCamelCase ? field.ToCamelCase() : field, value);
